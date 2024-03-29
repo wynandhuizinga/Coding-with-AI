@@ -1,5 +1,6 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+import json
 import requests
 
 app = Flask(__name__)
@@ -11,14 +12,21 @@ class Asset(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    device_type = db.Column(db.String(50))
    amount = db.Column(db.Float)
+  
+   def to_dict(self):
+    return {'id': self.id, 'device_type': self.device_type, 'amount': self.amount}
 
 # Create the assets table
 db.create_all()
 
 @app.route('/assets', methods=['GET'])
 def get_all_assets():
-   assets = Asset.query.all()
-   return jsonify(assets)
+  assets = Asset.query.all()
+  asset_list = []
+  for asset in assets:
+   asset_dict = {'id': asset.id, 'device_type': asset.device_type, 'amount': asset.amount}
+   asset_list.append(asset_dict)
+  return jsonify(asset_list)
 
 @app.route('/assets', methods=['POST'])
 def create_new_asset():

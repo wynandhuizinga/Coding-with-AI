@@ -1,0 +1,13 @@
+// Commands to start up application:
+virtualenv venv
+venv\Scripts\activate
+pip install flask flask_sqlalchemy
+python app.py
+// This makes your server run
+
+// In another console
+// Add an asset described in asset.json
+curl -X POST -H "Content-Type: application/json" --data @asset.json http://localhost:6000/assets
+
+// Retrieve all assets registered
+curl -X GET -H "Content-Type: application/json" http://localhost:6000/assets
