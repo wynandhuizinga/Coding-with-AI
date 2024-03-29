@@ -46,7 +46,7 @@ def create_new_asset():
 @app.route('/reference_devices', methods=['GET'])
 def get_reference_devices():
    try:
-       df = pd.read_csv('H:/AI generated programs/EIT-v10/referencedevices.csv', encoding='Latin-1')
+       df = pd.read_csv('referencedevices.csv', encoding='Latin-1')
        if len(df.dropna()) > 0:
            raise ValueError("Could not parse CSV file: {0}".format(len(df.dropna())))
        for index, row in df.iterrows():
