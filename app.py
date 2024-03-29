@@ -21,12 +21,11 @@ def get_all_assets():
   for asset in assets:
    asset_dict = {'id': asset.id, 'manufacturer': asset.manufacturer, 'name': asset.name, 'amount': asset.amount}
    asset_list.append(asset_dict)
-  return jsonify({'message': asset_list}), 201
+  return jsonify(asset_list), 201, {"Access-Control-Allow-Origin": "*"}
 
 @app.route('/total_gwp', methods=['GET'])
 def get_gwp_totals():
   asset_ids = Asset.query.all()
-#  gwp_totals = {}
   gwp_totals = 0.0
   for asset in asset_ids:
       reference_device = ReferenceDevice.query.filter_by(manufacturer=asset['manufacturer'], name=asset['name']).first()
@@ -34,7 +33,7 @@ def get_gwp_totals():
           gwp_totals += reference_device.gwp_total * asset.amount / reference_device.lifetime
   km_driven_comp = gwp_totals * float(4.18429) # source: https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator --> converted 2.6 miles to km (=4.18...)
   message = str("Total global warming potential of your CMDB: ") + str(round(gwp_totals, 2)) + str(" kgCO2eq over the entire lifetime of all assets combined.") + str("\n This is equivalent to ") + str(round(km_driven_comp, 2)) + str(" km driving with a personnel vehicle")
-  return jsonify({'message': message}), 201
+  return jsonify(message), 201, {"Access-Control-Allow-Origin": "*"}
 
 @app.route('/assets', methods=['POST'])
 def create_new_asset():
@@ -42,7 +41,7 @@ def create_new_asset():
     asset = Asset(manufacturer=data['manufacturer'], name=data['name'], amount=data['amount'], )
     db.session.add(asset)
     db.session.commit()
-    return jsonify({'message': 'Asset created successfully.'}), 201
+    return jsonify({'message': 'Asset created successfully.'}), 201, {"Access-Control-Allow-Origin": "*"}
 
 @app.route('/reference_devices', methods=['GET'])
 def get_reference_devices():
@@ -69,10 +68,10 @@ def get_reference_devices():
                gwp_othercomponents_ratio=float(row['gwp_othercomponents_ratio']))
            db.session.add(new_device)
            db.session.commit()
-       return jsonify({"message": "OK"}), 201
+       return jsonify({"message": "OK"}), 201, {"Access-Control-Allow-Origin": "*"}
    except Exception as e:
        print("An error occurred: ", str(e))
-       return jsonify({"message": "FAILED"}), 500
+       return jsonify({"message": "FAILED"}), 500, {"Access-Control-Allow-Origin": "*"}
 
 @app.route('/refresh_reference_devices', methods=['GET'])
 def get_refresh_reference_devices():
@@ -81,7 +80,7 @@ def get_refresh_reference_devices():
    csv_data = response.text
    with codecs.open('referencedevices.csv', 'w') as f:
        f.write(csv_data)
-   return jsonify({"message": "OK"}), 201
+   return jsonify({"message": "OK"}), 201, {"Access-Control-Allow-Origin": "*"}
 
 if __name__ == '__main__':
-  app.run(port=6000)
+  app.run(port=80)
