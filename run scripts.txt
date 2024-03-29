@@ -11,3 +11,12 @@ curl -X POST -H "Content-Type: application/json" --data @asset.json http://local
 
 // Retrieve all assets registered
 curl -X GET -H "Content-Type: application/json" http://localhost:6000/assets
+
+// Load reference devices from external data source
+curl -X GET -H "Content-Type: application/json" http://localhost:6000/reference_devices
+
+
+sqlite3 instance\database.db
+.tables
+SELECT * FROM asset;
+SELECT * FROM reference_devices;
