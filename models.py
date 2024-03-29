@@ -9,9 +9,18 @@ app.app_context().push()
 
 class Asset(db.Model):
    id = db.Column(db.Integer, primary_key=True)
-   device_type = db.Column(db.String(50))
-   amount = db.Column(db.Float)
-
+   manufacturer = db.Column(db.String(50))
+   name = db.Column(db.String(255))
+   amount = db.Column(db.Integer)
+   
+   def __getitem__(self, key):
+      if key == "manufacturer":
+          return self.manufacturer
+      elif key == "name":
+          return self.name
+      else:
+          raise AttributeError("Attribute '%s' not found on object of type Asset" % key)
+      
    def to_dict(self):
        return {'id': self.id, 'device_type': self.device_type, 'amount': self.amount}
 

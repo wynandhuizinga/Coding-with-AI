@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 import json
 import requests
@@ -21,31 +21,40 @@ def get_all_assets():
   assets = Asset.query.all()
   asset_list = []
   for asset in assets:
-   asset_dict = {'id': asset.id, 'device_type': asset.device_type, 'amount': asset.amount}
+   asset_dict = {'id': asset.id, 'manufacturer': asset.manufacturertype, 'name': asset.name, 'amount': asset.amount}
    asset_list.append(asset_dict)
   return jsonify(asset_list)
 
+@app.route('/total_gwp', methods=['GET'])
+def get_gwp_totals():
+  asset_ids = Asset.query.all()
+  gwp_totals = {}
+  for asset in asset_ids:
+      reference_device = ReferenceDevice.query.filter_by(manufacturer=asset['manufacturer'], name=asset['name']).first()
+      if reference_device:
+          if str(reference_device.id) in gwp_totals:
+              gwp_totals[str(reference_device.id)] += reference_device.gwp_total * asset.amount
+              print(asset.amount)
+          else:
+              gwp_totals[str(reference_device.id)] = reference_device.gwp_total * asset.amount
+              print("hist me")            
+  print(gwp_totals)
+  return jsonify({"status": "OK"}), 201
+
 @app.route('/assets', methods=['POST'])
 def create_new_asset():
-  with open('asset.json') as f:
-   data = json.load(f)
-  asset = Asset(**data)
-  db.session.add(asset)
-  db.session.commit()
-  return jsonify(data), 201
+    data = request.get_json()
+    asset = Asset(manufacturer=data['manufacturer'], name=data['name'], amount=data['amount'], )
+    db.session.add(asset)
+    db.session.commit()
+    return jsonify({'message': 'Asset created successfully.'}), 201
 
 @app.route('/reference_devices', methods=['GET'])
 def get_reference_devices():
    try:
-       # Read the CSV file from local disk
        df = pd.read_csv('H:/AI generated programs/EIT-v10/referencedevices.csv', encoding='Latin-1')
-       # df.str.replace(old='0xa0', new='') # bad fix
-
-       # Check if there are any errors in the CSV file
        if len(df.dropna()) > 0:
            raise ValueError("Could not parse CSV file: {0}".format(len(df.dropna())))
-
-       # Insert each row into the database
        for index, row in df.iterrows():
            new_device = ReferenceDevice(
                manufacturer=row['manufacturer'],
