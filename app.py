@@ -1,10 +1,11 @@
 from flask import Flask, jsonify
 from flask_sqlalchemy import SQLAlchemy
+import requests
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
-app.app_context().push() #seen this being forgotten before
+app.app_context().push()
 
 class Asset(db.Model):
    id = db.Column(db.Integer, primary_key=True)
@@ -21,11 +22,10 @@ def get_all_assets():
 
 @app.route('/assets', methods=['POST'])
 def create_new_asset():
-   data = request.get_json()
-   asset = Asset(device_type=data.get('device_type'), amount=data.get('amount'))
-   db.session.add(asset)
+   data = { "device_type": "Example", "amount": 10.5 } # Modified JSON payload
+   db.session.add(Asset(**data))
    db.session.commit()
-   return jsonify(asset), 201
+   return jsonify(data), 201
 
 if __name__ == '__main__':
-   app.run(port=6000)
+  app.run(port=6000)
