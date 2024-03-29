@@ -28,3 +28,17 @@ tr:hover {
 .highlight {
     background-color: #ffcc00;
 }
+
+.secondary-btn {
+   color: white;
+   font-size: 16px;
+   padding: 10px 20px;
+   border: none;
+   background-color: #555;
+}
+
+#message {
+ font-weight: bold;
+ color: lightgreen;
+ font-family: helvetica;
+}

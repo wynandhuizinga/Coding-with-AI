@@ -6,7 +6,9 @@
 </head>
 <body>
     <div class="container">
-        <button onclick="getAssets()">Get Assets</button>
+        <button type="button" class="secondary-btn" onclick="getAssets()">Get Assets</button>
+		<button type="button" class="secondary-btn" onclick="showMessage()" >Show Message</button>
+        <p id="message"></p>
         <table id="assetTable"></table>
         <script src="script.js"></script>
     </div>
