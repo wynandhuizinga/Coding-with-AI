@@ -5,9 +5,11 @@ pip install flask flask_sqlalchemy
 python app.py
 // This makes your server run
 
-// In another console
+// In another console (windows+R -> type cmd, and browse to your application folder)
 // Add an asset described in asset.json
 curl -X POST -H "Content-Type: application/json" --data @asset.json http://localhost:6000/assets
+curl -X POST -H "Content-Type: application/json" --data @asset2.json http://localhost:6000/assets
+curl -X POST -H "Content-Type: application/json" --data @asset3.json http://localhost:6000/assets
 
 // Retrieve all assets registered
 curl -X GET -H "Content-Type: application/json" http://localhost:6000/assets
@@ -15,7 +17,14 @@ curl -X GET -H "Content-Type: application/json" http://localhost:6000/assets
 // Load reference devices from external data source
 curl -X GET -H "Content-Type: application/json" http://localhost:6000/reference_devices
 
+// Add reference devices to my own database 
+curl -X GET -H "Content-Type: application/json" http://localhost:6000/refresh_reference_devices
 
+//calculate emissions
+curl -X GET -H "Content-Type: application/json" http://localhost:6000/total_gwp
+
+
+// Figuring out how to browse through my db:
 sqlite3 instance\database.db
 .tables
 SELECT * FROM asset;
