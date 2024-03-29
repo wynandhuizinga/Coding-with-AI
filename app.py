@@ -22,8 +22,10 @@ def get_all_assets():
 
 @app.route('/assets', methods=['POST'])
 def create_new_asset():
-   data = { "device_type": "Example", "amount": 10.5 } # Modified JSON payload
-   db.session.add(Asset(**data))
+   with open('asset.json') as f:
+    data = json.load(f)
+   asset = Asset(**data)
+   db.session.add(asset)
    db.session.commit()
    return jsonify(data), 201
 
