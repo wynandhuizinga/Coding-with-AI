@@ -4,11 +4,15 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db = SQLAlchemy(app)
+app.app_context().push() #seen this being forgotten before
 
 class Asset(db.Model):
    id = db.Column(db.Integer, primary_key=True)
    device_type = db.Column(db.String(50))
    amount = db.Column(db.Float)
+
+# Create the assets table
+db.create_all()
 
 @app.route('/assets', methods=['GET'])
 def get_all_assets():
