@@ -1,13 +1,23 @@
 ## Coding-with-AI
-My journey on exploring the possibilities of coding with a locally hosted AI
+### Index
+* [Abstract](#abstract)
+* [Introduction](#introduction)
+* [Gen-AI in short](#inshort)
+* [Subject](#subject)
+* [The Journey](#journey)
+* [Findings](#findings)
+* [Conclusion](#conclusion)
+* [Try out my results](#tryout)
+* [Getting started](#starting)
+* [Acknowledgement & more](#acknowledgement)
 
-### Abstract
+### Abstract <a name="abstract"></a>
 A short exploration of 2 weeks was conducted to evaluate and report the feasibility of leveraging local versions of large language models to develop applications as a software engineering team would do in a business context. Open source software was leveraged to convert natural language into a python codebase for the purpose of building a simplistic carbon accounting tool to identify the carbon footprint caused by assets registered in a configuration management database. During the exploration, a grossly limited version has been 'developed' as Proof of Feasibility. Building an application is found to be feasible although it does take time and requires innevitable sacrifices on security. Context is currently the biggest bottleneck and requires a spoon feeding approach to be productive. During the coarse of the exploration, conviction was developed that this bottleneck will disappear in due time. 
 
-### Introduction
+### Introduction <a name="introduction"></a>
 My name is Wynand Huizinga, I work at Accenture's custom engineering entity (Liquid Studio & Sustainability) in NL where I've been granted some time in between projects to adopt knowledge in AI. I have a background in product design and frequently fulfilled a role as product owner/manager. In that role, the goal is always to have a low total cost of ownership (TCO). Converting 'user stories' into code with a partly automated team is hence an interesting topic. Working with online gen-ai tools is already a inconceivable, but does come with consequences and added risk. I already worked on my local machine (offline) with latent stable diffusion (image generation) for more than a year. New to me was the feasibility of running language models (GPT's) locally. Below my journey on exploring the possibilities of gen-ai in relation to programming using a large language model: To what extend, can AI replace development capabilities? 
 
-### Gen-AI in short 
+### Gen-AI in short <a name="inshort"></a>
 You provide context (a prompt), in return you get 'completion' of your context. This works with Q&A, but also for regular conversations. Depending on the sophistication-level of your model, you can expect more sophisticated response. Telling a complex model about 'having had a good night rest' leads to a complex response telling you about the importance of quality sleep and how that raises productivity during the day. A simple model would merely respond with "good for you". The race for the most sophisticated models has begun, and all the bigger enterprises are in it.
 
 Their models however, may have downsides for 'us' consumers:
@@ -19,12 +29,12 @@ Their models however, may have downsides for 'us' consumers:
 
 Now especially for the latter reason, I conducted a study on running open source language models on your local machine. And more particularly, can I with close to 0 knowledge make an application by giving it textual functional requirements and prompt engineer it so that it returns code to me?
 
-### Subject
+### Subject <a name="subject"></a>
 Given our planetary challenges with regards to maintaining our planet, for this project I chose the topic of carbon accounting. It's not new or innovative, but it's certainly not getting enough attention. At Accenture where I currently work, we provide clients with insights on their carbon footprints caused by owning/leasing equipment (i.e. Laptops, phones, network switches, routers, access points, monitors, etc.). Suppliers of such equipment usually provide tech doc which ideally includes product lifecycle emissions. They usually also provide lifetime expectations, hence you have some metrics to base your own cause for annual emissions. When having those numbers, it's interesting to see if you can somehow stimulate yourself to compensate or sequester those emissions. 
  
 > "For language model I experimented with a few, but ultimately found a leaderboard and went for LosslessMegaCoder."
 
-### The journey
+### The journey <a name="journey"></a>
 After a few open source initiatives, I ended up with codebooga and silly tavern as a shell on top of it. Although silly tavern is actually a Waifu / RPG platform, I foresaw potential to mimic a software engineering team. Most platforms allow to provide a character to your assistant. A character essentially enriches content of your own prompt. Silly tavern enables you to have more than 1 character in a chat room. That implies you can create characters for all the roles in your software team (Architect, Backend developer, Scrum master, UX designers, business analyst, security architects, testers, etc.). The theory being: provide context of for example my carbon accounting application: Let them figure out how to make a solution. That might come in handy during my study.
 
 I initially assembled a team, which I asked to come with a solution for my product. As expected, my architect started drafting a data model, and various microservice definitions. That was for me already the first learning experience: "how would you distribute subcomponents into an architecture?" It started with services for: user, assets, calculation & reporting. It even got accompanied by some definitions for an MVP with critical use cases. 
@@ -53,7 +63,7 @@ After a while of wiggling around about styling, I managed to get a simple page w
 
 | [![Image5](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/06a%20-%20startscreen.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/06a%20-%20startscreen.JPG) | [![Image6](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/06b%20-%20device%20overview.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/06b%20-%20device%20overview.JPG) | [![Image7](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/06c%20-%20calculation%20outcome.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/06c%20-%20calculation%20outcome.JPG) |
 
-### Findings
+### Findings <a name="findings"></a>
 - At this moment, you have to be patient: feed small blocks of context. Occasionally start a new chat, and provide minimum code snippets to let it expand on. 
 - Forget about user authentication: I tried a couple of different approaches with a.o. JWT. It's very hard for 'new' software engineers to grasp the concepts of salt & pepper which makes it very challenging to test the work. For now: Leave this to the experts. 
 - Consideration: level of security standards is at best the standards known at the time the model was made
@@ -62,10 +72,10 @@ After a while of wiggling around about styling, I managed to get a simple page w
 - Often your model doesn't provide the 'right' answer, but you do have to copy paste code to try that. Especially when you need to change multiple blocks in multiple files, it's easy to loose track. For this reason it's super important to have a versioning system where you can easily commit and reset branches. 
 - It took me a significant number of attempts to build the first 'working application' on which I had confidence that my first features would work. In my experience, it doesn't hurt to throw something away, or to re-insert the same prompt/context and let it provide an answer on a different seed. Every request takes a random number (seed), which leads to different response. Sometimes the prompt is fine, but the model simply fails. I observed that running the materials locally give you a significant advantage in terms of control over the conversation. Especially Silly Tavern is very good at regenerating messages and even branching off from previous quotes. 
 
-### Conclusion
+### Conclusion <a name="conclusion"></a>
 I'm having mixed feelings about this being impressive. On one hand, it's way off from enterprise software quality, not even close. I did however not know anything about python, and I did manage to draw out a basic web app with a very high confidence of being able to improve it to more acceptable standards. Certainly, I've been overwhelmed by the sheer power of what it can do for people with limited engineering skills. The technology is definitely here to stay. Hopefully by writing this guide, I managed to provide insights on the feasibility and accessibility of the technology. You're most welcome to reach out in case of questions. You are welcome to do so by mail / linkedin / phone.
 
-### Trying out my end result
+### Trying out my end result <a name="tryout"></a>
 Assuming you're having GIT installed (and added to your environment variables)
 In command prompt: 
 ```
@@ -73,7 +83,7 @@ git clone git@github.com:wynandhuizinga/Coding-with-AI.git
 ```
 Once downloaded, browse to the newly created folder and open ["run scripts.txt"](https://github.com/wynandhuizinga/Coding-with-AI/blob/main/run%20scripts.txt)
 
-### Getting started with AI yourself
+### Getting started with AI yourself <a name="starting"></a>
 For those inspired and interested in getting started:
 Start by installing python, oobabooga, optionally silly tavern and git.
 Get some sort of development environment: notepad++ or LiClipse
@@ -83,10 +93,10 @@ Hardware: NVIDIA graphics card - mine: 3060 TI 12gb, >32GB ram -> half of the mo
 
 My settings for loading a LLM as well as configuring an LLM. This can be a study on its own, my settings certainly weren't perfect. Sometimes my architect would start saying that I approved certain proposals which would then get followed up by an implementation by other 'characters'.
 
-### A few more examples to visualize how it worked for me:
+#### A few more examples to visualize how it worked for me:
 | [![Image10](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20another%20impression%20of%20how%20a%20session%20with%20a%20team%20goes.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20another%20impression%20of%20how%20a%20session%20with%20a%20team%20goes.JPG) | [![Image11](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20bonus%20example%20of%20quering%20for%20simplistic%20hardcoded%20updates.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20bonus%20example%20of%20quering%20for%20simplistic%20hardcoded%20updates.JPG) | [![Image12](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20bonus%20providing%20detailed%20context.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20bonus%20providing%20detailed%20context.JPG) | [![Image13](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20bonus%20spoonfeed%20example.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20bonus%20spoonfeed%20example.JPG) | [![Image14](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20getting%20scolded%20by%20my%20virtual%20architect.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20getting%20scolded%20by%20my%20virtual%20architect.JPG) |
 
-### Acknolegdement
+### Acknolegdement <a name="acknowledgement"></a>
 Special thanks to the good people contributing to projects in sources.
 
 #### sources:
