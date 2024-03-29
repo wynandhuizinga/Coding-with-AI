@@ -1,0 +1,30 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: auto;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+tr:nth-child(even) {
+    background-color: #555;
+}
+
+tr:hover {
+    background-color: #999;
+}
+
+.highlight {
+    background-color: #ffcc00;
+}
