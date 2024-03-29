@@ -15,29 +15,25 @@ Their models however, may have downsides for 'us' consumers:
 - May be censored
 - Whatever context you provide, is handed over to the supplier of the model. 
 
-```
-Imagine sending code snippets which give away authentication methodologies used in your ecosystem." ~ what is your workforce actually supplying to third parties (i.e. openai/chatgpt, github/co-pilot, ...)? are you even monitoring that?
-```
+> "Imagine sending code snippets which give away authentication methodologies used in your ecosystem." ~ what is your workforce actually supplying to third parties (i.e. openai/chatgpt, github/co-pilot, ...)? are you even monitoring that?
 
 Now especially for the latter reason, I conducted a study on running open source language models on your local machine. And more particularly, can I with close to 0 knowledge make an application by giving it textual functional requirements and prompt engineer it so that it returns code to me?
 
 ### Subject
 Given our planetary challenges with regards to maintaining our planet, for this project I chose the topic of carbon accounting. It's not new or innovative, but it's certainly not getting enough attention. At Accenture where I currently work, we provide clients with insights on their carbon footprints caused by owning/leasing equipment (i.e. Laptops, phones, network switches, routers, access points, monitors, etc.). Suppliers of such equipment usually provide tech doc which ideally includes product lifecycle emissions. They usually also provide lifetime expectations, hence you have some metrics to base your own cause for annual emissions. When having those numbers, it's interesting to see if you can somehow stimulate yourself to compensate or sequester those emissions. 
  
-```
-For language model I experimented with a few, but ultimately found a leaderboard and went for LosslessMegaCoder.
-```
+> "For language model I experimented with a few, but ultimately found a leaderboard and went for LosslessMegaCoder."
 
 ### The journey
 After a few open source initiatives, I ended up with codebooga and silly tavern as a shell on top of it. Although silly tavern is actually a Waifu / RPG platform, I foresaw potential to mimic a software engineering team. Most platforms allow to provide a character to your assistant. A character essentially enriches content of your own prompt. Silly tavern enables you to have more than 1 character in a chat room. That implies you can create characters for all the roles in your software team (Architect, Backend developer, Scrum master, UX designers, business analyst, security architects, testers, etc.). The theory being: provide context of for example my carbon accounting application: Let them figure out how to make a solution. That might come in handy during my study.
 
 I initially assembled a team, which I asked to come with a solution for my product. As expected, my architect started drafting a data model, and various microservice definitions. That was for me already the first learning experience: "how would you distribute subcomponents into an architecture?" It started with services for: user, assets, calculation & reporting. It even got accompanied by some definitions for an MVP with critical use cases. 
 
-![Image1](https://github.com/wynandhuizinga/Screenshots/blob/main/01%20Arch%20services.JPG)
+[![Image1](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/01%20Arch%20services.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/01%20Arch%20services.JPG)
 
 Swiftly enough I got supplied with instructions on how to setup project bones, as well as extensions on first API Endpoints and instructions on how to run my application. And upon trying, it at first even seemed to work. 
 
-![Image2](https://github.com/wynandhuizinga/Screenshots/blob/main/02%20First%20code.JPG)
+[![Image2](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/02%20First%20code.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/02%20First%20code.JPG)
 
 Soon enough, I found out that authentication did not really authenticate me, or at least... it didn't remember for very long that I was authenticated. Either way, I learned that authentication either ways is not very valuable: it relied on outdated technology. My fresh python installation did not allow me to run specific encryption methods (SH256) anymore as it was beyond deprecation. No problem, let me proceed without encryption & login. Specifics are not in scope of my goal anyway. 
 
@@ -47,15 +43,15 @@ I also learned how to 'break down' complex work to simpler questions, and extend
 
 I ultimately managed to get a DB and back-end 'engine' up and running. It would take a API endpoints to insert my assets, import reference assets, and compare the 2 for matches, and then look up the reference assets tech specs for a global warming potential. Although far from supportive towards my use cases, slow in performance, it's surely good enough to build on to meet my goals. 
 
-![Image3](https://github.com/wynandhuizinga/Screenshots/blob/main/03%20Proof%20of%20endpoints.JPG)
+[![Image3](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/03%20Proof%20of%20endpoints.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/03%20Proof%20of%20endpoints.JPG)
 
 What I was still missing at this moment was a front-end. I expected this to be fairly easy, however, what I underestimated was the amount of lines of code involved in front-end. The more lines of code, the more context you're adding, and the clumsier your model can get in its interaction & responses
 
-![Image4](https://github.com/wynandhuizinga/Screenshots/blob/main/04%20Creation%20of%20front-end.JPG)
+[![Image4](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/04%20Creation%20of%20front-end.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/04%20Creation%20of%20front-end.JPG)
 
 After a while of wiggling around about styling, I managed to get a simple page with 2 buttons. Again, goal is to figure out if it 'can' work. End result is far from 'pretty', but it does work (provided you use a creative way to with curl commands to fill the database). Can we insert data through front-end? I'm 100% convinced of that, but it would be helpful if the model was just a little bit smarter. The learning curve + the results so far took about 2 weeks. 
 
-|![Image5](https://github.com/wynandhuizinga/Screenshots/blob/main/06a%20-%20startscreen.JPG) | ![Image6](https://github.com/wynandhuizinga/Screenshots/blob/main/06b%20-%20device%20overview.JPG) | ![Image7](https://github.com/wynandhuizinga/Screenshots/blob/main/06c%20-%20calculation%20outcome.JPG) |
+| [![Image5](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/06a%20-%20startscreen.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/06a%20-%20startscreen.JPG) | [![Image6](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/06b%20-%20device%20overview.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/06b%20-%20device%20overview.JPG) | [![Image7](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/06c%20-%20calculation%20outcome.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/06c%20-%20calculation%20outcome.JPG) |
 
 ### Findings
 - At this moment, you have to be patient: feed small blocks of context. Occasionally start a new chat, and provide minimum code snippets to let it expand on. 
@@ -71,21 +67,24 @@ I'm having mixed feelings about this being impressive. On one hand, it's way off
 
 ### Trying out my end result
 Assuming you're having GIT installed (and added to your environment variables)
-In command prompt: git clone git@github.com:wynandhuizinga/Coding-with-AI.git
-Once downloaded, browse to the newly created folder and open "run scripts.txt"
-https://github.com/wynandhuizinga/Coding-with-AI/blob/main/run%20scripts.txt
+In command prompt: 
+```
+git clone git@github.com:wynandhuizinga/Coding-with-AI.git
+```
+Once downloaded, browse to the newly created folder and open ["run scripts.txt"](https://github.com/wynandhuizinga/Coding-with-AI/blob/main/run%20scripts.txt)
 
 ### Getting started with AI yourself
 For those inspired and interested in getting started:
 Start by installing python, oobabooga, optionally silly tavern and git.
 Get some sort of development environment: notepad++ or LiClipse
 Hardware: NVIDIA graphics card - mine: 3060 TI 12gb, >32GB ram -> half of the modern gaming PC's suffice. 
-|![Image8](https://github.com/wynandhuizinga/Screenshots/blob/main/08%20my%20settings%20for%20lossless.JPG) |![Image9](https://github.com/wynandhuizinga/Screenshots/blob/main/08%20my%20settings%20for%20lossless-model-loader.JPG) |
+
+| [![Image8](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/08%20my%20settings%20for%20lossless.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/08%20my%20settings%20for%20lossless.JPG) | [![Image9](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/08%20my%20settings%20for%20lossless-model-loader.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/08%20my%20settings%20for%20lossless-model-loader.JPG) |
 
 My settings for loading a LLM as well as configuring an LLM. This can be a study on its own, my settings certainly weren't perfect. Sometimes my architect would start saying that I approved certain proposals which would then get followed up by an implementation by other 'characters'.
 
 ### A few more examples to visualize how it worked for me:
-|![Image10](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20another%20impression%20of%20how%20a%20session%20with%20a%20team%20goes.JPG) |![Image11](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20bonus%20example%20of%20quering%20for%20simplistic%20hardcoded%20updates.JPG) |![Image12](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20bonus%20providing%20detailed%20context.JPG) |![Image13](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20bonus%20spoonfeed%20example.JPG) |![Image14](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20getting%20scolded%20by%20my%20virtual%20architect.JPG) |
+| [![Image10](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20another%20impression%20of%20how%20a%20session%20with%20a%20team%20goes.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20another%20impression%20of%20how%20a%20session%20with%20a%20team%20goes.JPG) | [![Image11](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20bonus%20example%20of%20quering%20for%20simplistic%20hardcoded%20updates.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20bonus%20example%20of%20quering%20for%20simplistic%20hardcoded%20updates.JPG) | [![Image12](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20bonus%20providing%20detailed%20context.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20bonus%20providing%20detailed%20context.JPG) | [![Image13](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20bonus%20spoonfeed%20example.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20bonus%20spoonfeed%20example.JPG) | [![Image14](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20getting%20scolded%20by%20my%20virtual%20architect.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20getting%20scolded%20by%20my%20virtual%20architect.JPG) |
 
 ### Acknolegdement
 Special thanks to the good people contributing to projects in sources.
