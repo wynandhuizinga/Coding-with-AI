@@ -96,7 +96,7 @@ My settings for loading a LLM as well as configuring an LLM. This can be a study
 #### A few more examples to visualize how it worked for me:
 | [![Image10](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20another%20impression%20of%20how%20a%20session%20with%20a%20team%20goes.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20another%20impression%20of%20how%20a%20session%20with%20a%20team%20goes.JPG) | [![Image11](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20bonus%20example%20of%20quering%20for%20simplistic%20hardcoded%20updates.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20bonus%20example%20of%20quering%20for%20simplistic%20hardcoded%20updates.JPG) | [![Image12](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20bonus%20providing%20detailed%20context.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20bonus%20providing%20detailed%20context.JPG) | [![Image13](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20bonus%20spoonfeed%20example.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20bonus%20spoonfeed%20example.JPG) | [![Image14](https://github.com/wynandhuizinga/Screenshots/blob/main/thumbs/07%20-%20getting%20scolded%20by%20my%20virtual%20architect.JPG)](https://github.com/wynandhuizinga/Screenshots/blob/main/07%20-%20getting%20scolded%20by%20my%20virtual%20architect.JPG) |
 
-### Acknolegdement <a name="acknowledgement"></a>
+### Acknowlegdement <a name="acknowledgement"></a>
 Special thanks to the good people contributing to projects in sources.
 
 #### sources:
